@@ -16,14 +16,13 @@ export default class extends BaseSchema {
 
     // Create pivot table for many-to-many relationship
     this.schema.createTable('license_support_items', (table) => {
-      table.uuid('id').primary()
       table.uuid('license_id').references('id').inTable('licenses').onDelete('CASCADE')
       table.uuid('support_item_id').references('id').inTable('support_items').onDelete('CASCADE')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
       
-      // Ensure unique combinations
-      table.unique(['license_id', 'support_item_id'])
+      // Make the combination the primary key
+      table.primary(['license_id', 'support_item_id'])
     })
   }
 

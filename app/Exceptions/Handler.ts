@@ -18,6 +18,11 @@ export default class ExceptionHandler extends HttpExceptionHandler {
       return ctx.view.render("errors/404");
     }
 
+    // Check if it's a row not found error
+    if (error.message && error.message.includes("E_ROW_NOT_FOUND")) {
+      return ctx.view.render("errors/e_row_not_found");
+    }
+
     // For other errors, use the parent handler
     return super.handle(error, ctx);
   }

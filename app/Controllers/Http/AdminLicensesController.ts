@@ -13,44 +13,51 @@ export default class AdminLicensesController {
   }
 
   public async create({ view }: HttpContextContract) {
-    const supportItems = await SupportItem.query().where('isActive', true).orderBy('category', 'asc');
+    const supportItems = await SupportItem.query()
+      .where("isActive", true)
+      .orderBy("category", "asc");
     return view.render("admin/licenses/create", { supportItems });
   }
 
   public async store({ request, response }: HttpContextContract) {
     const data = request.only([
-      "license_key",
-      "start_date",
-      "end_date",
+      "licenseKey",
+      "startDate",
+      "endDate",
       "status",
-      "company_name",
-      "company_address",
-      "company_email",
-      "pic_name",
-      "pic_phone",
+      "companyName",
+      "companyAddress",
+      "companyEmail",
+      "picName",
+      "picPhone",
     ]);
 
     try {
       const license = await License.create(data);
 
       // Create support response times
-      const supportTimes = request.input("support_response_times", []);
-      for (const supportTime of supportTimes) {
-        if (supportTime.category && supportTime.description) {
+      const supportCategories = request.input("supportCategories", []);
+      const supportResponseTimes = request.input("supportResponseTimes", []);
+      const supportDescriptions = request.input("supportDescriptions", []);
+      const supportResolutions = request.input("supportResolutions", []);
+
+      // Create support response times from the arrays
+      for (let i = 0; i < supportCategories.length; i++) {
+        if (supportCategories[i] && supportDescriptions[i]) {
           await SupportResponseTime.create({
             licenseId: license.id,
-            category: supportTime.category,
-            description: supportTime.description,
-            responseTime: supportTime.response_time,
-            resolution: supportTime.resolution,
+            category: supportCategories[i],
+            description: supportDescriptions[i],
+            responseTime: supportResponseTimes[i] || "",
+            resolution: supportResolutions[i] || "",
           });
         }
       }
 
       // Attach selected support items
-      const selectedSupportItems = request.input("support_items", []);
+      const selectedSupportItems = request.input("supportItems", []);
       if (selectedSupportItems.length > 0) {
-        await license.related('supportItems').attach(selectedSupportItems);
+        await license.related("supportItems").attach(selectedSupportItems);
       }
 
       return response.redirect().toRoute("admin.licenses.index");
@@ -77,26 +84,32 @@ export default class AdminLicensesController {
       .preload("supportItems")
       .firstOrFail();
 
-    const supportItems = await SupportItem.query().where('isActive', true).orderBy('category', 'asc');
-    
+    const supportItems = await SupportItem.query()
+      .where("isActive", true)
+      .orderBy("category", "asc");
+
     // Get selected support item IDs
-    const selectedSupportItemIds = license.supportItems.map(item => item.id);
-    
-    return view.render("admin/licenses/edit", { license, supportItems, selectedSupportItemIds });
+    const selectedSupportItemIds = license.supportItems.map((item) => item.id);
+
+    return view.render("admin/licenses/edit", {
+      license,
+      supportItems,
+      selectedSupportItemIds,
+    });
   }
 
   public async update({ params, request, response }: HttpContextContract) {
     const license = await License.findOrFail(params.id);
     const data = request.only([
-      "license_key",
-      "start_date",
-      "end_date",
+      "licenseKey",
+      "startDate",
+      "endDate",
       "status",
-      "company_name",
-      "company_address",
-      "company_email",
-      "pic_name",
-      "pic_phone",
+      "companyName",
+      "companyAddress",
+      "companyEmail",
+      "picName",
+      "picPhone",
     ]);
 
     try {
@@ -106,22 +119,29 @@ export default class AdminLicensesController {
       await SupportResponseTime.query()
         .where("license_id", license.id)
         .delete();
-      const supportTimes = request.input("support_response_times", []);
-      for (const supportTime of supportTimes) {
-        if (supportTime.category && supportTime.description) {
+
+      // Get the arrays from the form
+      const supportCategories = request.input("supportCategories", []);
+      const supportResponseTimes = request.input("supportResponseTimes", []);
+      const supportDescriptions = request.input("supportDescriptions", []);
+      const supportResolutions = request.input("supportResolutions", []);
+
+      // Create support response times from the arrays
+      for (let i = 0; i < supportCategories.length; i++) {
+        if (supportCategories[i] && supportDescriptions[i]) {
           await SupportResponseTime.create({
             licenseId: license.id,
-            category: supportTime.category,
-            description: supportTime.description,
-            responseTime: supportTime.response_time,
-            resolution: supportTime.resolution,
+            category: supportCategories[i],
+            description: supportDescriptions[i],
+            responseTime: supportResponseTimes[i] || "",
+            resolution: supportResolutions[i] || "",
           });
         }
       }
 
       // Update support items
-      const selectedSupportItems = request.input("support_items", []);
-      await license.related('supportItems').sync(selectedSupportItems);
+      const selectedSupportItems = request.input("supportItems", []);
+      await license.related("supportItems").sync(selectedSupportItems);
 
       return response.redirect().toRoute("admin.licenses.index");
     } catch (error) {

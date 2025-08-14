@@ -25,26 +25,7 @@ Route.get("/", async ({ response }) => {
   return response.redirect("/license/search");
 });
 
-// API routes
-Route.group(() => {
-  Route.get("/users", "UsersController.index");
-  Route.post("/users", "UsersController.store");
-  Route.get("/users/:id", "UsersController.show");
-  Route.put("/users/:id", "UsersController.update");
-  Route.delete("/users/:id", "UsersController.destroy");
-
-  Route.get("/posts", "PostsController.index");
-  Route.post("/posts", "PostsController.store");
-  Route.get("/posts/:id", "PostsController.show");
-  Route.put("/posts/:id", "PostsController.update");
-  Route.delete("/posts/:id", "PostsController.destroy");
-}).prefix("/api");
-
 // Frontend routes
-Route.get("/dashboard", async ({ view }) => {
-  return view.render("dashboard");
-});
-
 Route.get("/license/search", "LicenseController.search");
 Route.get("/license/:key", "LicenseController.show");
 
@@ -68,11 +49,16 @@ Route.group(() => {
   Route.put("/licenses/:id", "AdminLicensesController.update").as(
     "admin.licenses.update"
   );
+  Route.post("/licenses/:id", "AdminLicensesController.update").as(
+    "admin.licenses.update.post"
+  );
   Route.delete("/licenses/:id", "AdminLicensesController.destroy").as(
     "admin.licenses.destroy"
   );
+  Route.post("/licenses/:id/delete", "AdminLicensesController.destroy").as(
+    "admin.licenses.destroy.post"
+  );
 
-  // Support Items Management
   Route.get("/support-items", "AdminSupportItemsController.index").as(
     "admin.support-items.index"
   );
@@ -88,8 +74,11 @@ Route.group(() => {
   Route.get("/support-items/:id/edit", "AdminSupportItemsController.edit").as(
     "admin.support-items.edit"
   );
-  Route.post("/support-items/:id", "AdminSupportItemsController.update").as(
+  Route.put("/support-items/:id", "AdminSupportItemsController.update").as(
     "admin.support-items.update"
+  );
+  Route.post("/support-items/:id", "AdminSupportItemsController.update").as(
+    "admin.support-items.update.post"
   );
   Route.post(
     "/support-items/:id/delete",

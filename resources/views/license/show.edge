@@ -132,10 +132,54 @@
             background: #ffffff;
         }
 
-        .support-item h4 {
-            color: #2563eb;
+        /* Cleaner styles for support items */
+        .support-item-header {
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+        }
+
+        .support-item-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-item-category {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            display: inline-block;
+        }
+
+        .support-item-category.support-category {
+            background-color: #3b82f6; /* Blue */
+        }
+        .support-item-category.maintenance-category {
+            background-color: #10b981; /* Green */
+        }
+        .support-item-category.performance-category {
+            background-color: #f59e0b; /* Orange */
+        }
+        .support-item-category.security-category {
+            background-color: #ef4444; /* Red */
+        }
+        .support-item-category.warranty-category {
+            background-color: #8b5cf6; /* Purple */
+        }
+        .support-item-category.general-category {
+            background-color: #6b7280; /* Gray */
+        }
+
+        .support-item-description {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0;
         }
 
         .details-grid {
@@ -497,8 +541,11 @@
                     @if(licenseData.supportItems && licenseData.supportItems.length > 0)
                         @each(item in licenseData.supportItems)
                             <div class="support-item">
-                                <h4>{{ item.title }}</h4>
-                                <p>{{ item.description }}</p>
+                                <div class="support-item-header">
+                                    <h4 class="support-item-title">{{ item.title }}</h4>
+                                    <div class="support-item-category {{ item.category }}-category">{{ item.category }}</div>
+                                </div>
+                                <p class="support-item-description">{{ item.description }}</p>
                             </div>
                         @endeach
                     @else
