@@ -36,9 +36,18 @@ deploy-*.sh
 start-*.sh
 cron-*.sh
 
+# CPanel and deployment files (may contain credentials)
+CPANEL_*.md
+!CPANEL_*.template.md
+setup-*.sh
+deploy-*.sh
+start-*.sh
+cron-*.sh
+
 # Template files (safe to commit)
 !*.template
 !*.template.sh
+!*.template.md
 
 # IDE and editor files
 .vscode
