@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>License Search - Forosta Jaya Makmur</title>
+    <title>Forosta Jaya Makmur - License Management System</title>
+    <meta name="description" content="Search and verify software licenses for Forosta Jaya Makmur IT Solutions">
+    <meta name="keywords" content="license, software, IT solutions, Forosta Jaya Makmur">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -43,12 +45,35 @@
     <!-- Main Content -->
     <main class="flex-1">
         <div class="container mx-auto px-4">
+            <!-- Welcome Section -->
+            <section class="welcome-section text-center py-12 mb-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex justify-center mb-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-xl flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-3xl tracking-wide">F</span>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-4xl font-bold text-white">Forosta</div>
+                                <div class="text-lg text-blue-200 font-semibold">Jaya Makmur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-blue-100 text-lg mb-4">
+                        Professional IT Solutions & Software Development
+                    </p>
+                    <p class="text-blue-50 text-base max-w-2xl mx-auto">
+                        Trusted partner for enterprise software solutions, custom development, and comprehensive IT services.
+                    </p>
+                </div>
+            </section>
+
             <section class="search-section text-center py-16">
                 <h1 class="search-title text-5xl md:text-6xl font-bold text-white mb-4 text-shadow-lg">
-                    License Search
+                    Forosta License Management
                 </h1>
                 <p class="search-subtitle text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
-                    Enter your license key to view details and access your software license information
+                    Welcome to the official license verification system. Enter your license key to view details and access your software license information.
                 </p>
                 
                 <form class="search-form max-w-lg mx-auto mb-8" method="GET" action="/license/search" onsubmit="return handleSearch(event)">
@@ -83,6 +108,22 @@
                         {{ error }}
                     </div>
                 @endif
+
+                <!-- Navigation Links -->
+                <div class="mt-12 pt-8 border-t border-blue-200 border-opacity-30">
+                    <p class="text-blue-100 mb-6">Need administrative access?</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="/dashboard" class="text-blue-200 hover:text-white transition-colors duration-200 px-4 py-2 rounded-lg border border-blue-200 border-opacity-30 hover:border-opacity-60">
+                            Dashboard
+                        </a>
+                        <a href="/admin/licenses" class="text-blue-200 hover:text-white transition-colors duration-200 px-4 py-2 rounded-lg border border-blue-200 border-opacity-30 hover:border-opacity-60">
+                            Admin Panel
+                        </a>
+                        <a href="https://www.forostajayamakmur.com/" target="_blank" class="text-blue-200 hover:text-white transition-colors duration-200 px-4 py-2 rounded-lg border border-blue-200 border-opacity-30 hover:border-opacity-60">
+                            Company Website
+                        </a>
+                    </div>
+                </div>
 
             </section>
         </div>
