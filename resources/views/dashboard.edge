@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdonisJS + Lucid Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">
+            AdonisJS + Lucid Demo
+        </h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Users Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Users</h2>
+
+                <form id="userForm" class="mb-6">
+                    <div class="space-y-3">
+                        <input
+                            type="email"
+                            id="userEmail"
+                            placeholder="Email"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        <input
+                            type="text"
+                            id="userName"
+                            placeholder="Name"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        <button
+                            type="submit"
+                            class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
+                        >
+                            Create User
+                        </button>
+                    </div>
+                </form>
+
+                <div id="usersList" class="space-y-2">
+                    <!-- Users will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Posts Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Posts</h2>
+
+                <form id="postForm" class="mb-6">
+                    <div class="space-y-3">
+                        <input
+                            type="text"
+                            id="postTitle"
+                            placeholder="Title"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        <textarea
+                            id="postContent"
+                            placeholder="Content"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            rows="3"
+                            required
+                        ></textarea>
+                        <select
+                            id="postAuthorId"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                            <option value="">Select Author</option>
+                        </select>
+                        <button
+                            type="submit"
+                            class="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
+                        >
+                            Create Post
+                        </button>
+                    </div>
+                </form>
+
+                <div id="postsList" class="space-y-3">
+                    <!-- Posts will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let users = [];
+        let posts = [];
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUsers();
+            fetchPosts();
+        });
+
+        // Fetch users
+        async function fetchUsers() {
+            try {
+                const response = await fetch('/api/users');
+                users = await response.json();
+                displayUsers();
+                updateAuthorSelect();
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        // Fetch posts
+        async function fetchPosts() {
+            try {
+                const response = await fetch('/api/posts');
+                posts = await response.json();
+                displayPosts();
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
+        }
+
+        // Display users
+        function displayUsers() {
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = users.map(user => `
+                <div class="p-3 bg-gray-50 rounded-md">
+                    <p class="font-medium">${user.name}</p>
+                    <p class="text-sm text-gray-600">${user.email}</p>
+                    <p class="text-xs text-gray-500">Posts: ${user.posts?.length || 0}</p>
+                </div>
+            `).join('');
+        }
+
+        // Display posts
+        function displayPosts() {
+            const postsList = document.getElementById('postsList');
+            postsList.innerHTML = posts.map(post => `
+                <div class="p-3 bg-gray-50 rounded-md">
+                    <h3 class="font-medium">${post.title}</h3>
+                    <p class="text-sm text-gray-600">${post.content}</p>
+                    <p class="text-xs text-gray-500">By: ${post.author?.name || 'Unknown'}</p>
+                </div>
+            `).join('');
+        }
+
+        // Update author select
+        function updateAuthorSelect() {
+            const select = document.getElementById('postAuthorId');
+            select.innerHTML = '<option value="">Select Author</option>' + 
+                users.map(user => `<option value="${user.id}">${user.name}</option>`).join('');
+        }
+
+        // Handle user form submission
+        document.getElementById('userForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            const name = document.getElementById('userName').value;
+
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, name }),
+                });
+                
+                if (response.ok) {
+                    document.getElementById('userForm').reset();
+                    fetchUsers();
+                }
+            } catch (error) {
+                console.error('Error creating user:', error);
+            }
+        });
+
+        // Handle post form submission
+        document.getElementById('postForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const authorId = document.getElementById('postAuthorId').value;
+
+            try {
+                const response = await fetch('/api/posts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, content, authorId }),
+                });
+                
+                if (response.ok) {
+                    document.getElementById('postForm').reset();
+                    fetchPosts();
+                }
+            } catch (error) {
+                console.error('Error creating post:', error);
+            }
+        });
+    </script>
+</body>
+</html>
