@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forosta Jaya Makmur - License</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .logo-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: -5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+            background: #f1f5f9;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .license-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .license-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-key {
+            background: #ffffff;
+            border: 3px solid #2563eb;
+            border-radius: 15px;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            font-family: 'Courier New', monospace;
+            color: #2563eb;
+            margin-bottom: 2rem;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+            font-weight: bold;
+        }
+
+        .license-key:hover {
+            background: #2563eb;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.25);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 0.5rem;
+        }
+
+        .module-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #bfdbfe;
+        }
+
+        .status-active {
+            background: #10b981;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .support-item {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid #2563eb;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .support-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            background: #ffffff;
+        }
+
+        .support-item h4 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-column h4 {
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .detail-column ul {
+            list-style: none;
+        }
+
+        .detail-column li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .detail-column li:hover {
+            background: #f8fafc;
+            padding-left: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .detail-column li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* Table */
+        .response-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .response-table th,
+        .response-table td {
+            padding: 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .response-table th {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .response-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .response-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            background: #ffffff;
+        }
+
+        .contact-item h4 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+            color: #ffffff;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #60a5fa;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #475569;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #60a5fa;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #475569;
+            color: #94a3b8;
+        }
+
+        /* Company Info Section */
+        .company-info {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2.5rem;
+            border: 1px solid #bfdbfe;
+            text-align: center;
+        }
+
+        .company-info h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .company-info p {
+            color: #475569;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .license-title {
+                font-size: 2.5rem;
+            }
+
+            .module-info {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .support-grid,
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .license-key {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
+            }
+        }
+
+        /* Success message */
+        .copy-success {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .copy-success.show {
+            transform: translateX(0);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">F</div>
+                    <div>
+                        <div class="logo-text">Forosta</div>
+                        <div class="logo-subtitle">Jaya Makmur</div>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/license">License</a></li>
+                        <li><a href="/api/users">Users API</a></li>
+                        <li><a href="/api/posts">Posts API</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Company Info Section -->
+            <section class="company-info">
+                <h3>PT. Forosta Jaya Makmur</h3>
+                <p>IT Solution, Software Development & Special Equipment</p>
+            </section>
+
+            <!-- License Section -->
+            <section class="license-section">
+                <h1 class="license-title">Software License</h1>
+                <div class="license-key" data-key="{{ licenseData.licenseKey }}">
+                    {{ licenseData.licenseKey }}
+                </div>
+                <p style="color: #64748b; font-size: 1.1rem;">Click the license key above to copy to clipboard</p>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </section>
+
+            <!-- Source Code Management Maintenance -->
+            <section class="content-section">
+                <h2 class="section-title">Source Code Management Maintenance</h2>
+                <div class="module-info">
+                    <div>
+                        <strong style="color: #1e293b; font-size: 1.1rem;">1. MODULE</strong><br>
+                        <span class="license-key" style="font-size: 1rem; margin: 0; background: #ffffff;">{{ licenseData.licenseKey }}</span>
+                    </div>
+                    <div>
+                        <div style="color: #475569; margin-bottom: 0.5rem;">Start Date: {{ licenseData.startDate }}</div>
+                        <div style="color: #475569; margin-bottom: 0.5rem;">End Date: {{ licenseData.endDate }}</div>
+                        <span class="status-active">{{ licenseData.status }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Support & Warranty Scope -->
+            <section class="content-section">
+                <h2 class="section-title">Technical Support & Warranty Scope</h2>
+                <div class="support-grid">
+                    <div class="support-item">
+                        <h4>Technical Assistance</h4>
+                        <p>Remote support for troubleshooting, configuration, and minor fixes with our expert IT team.</p>
+                    </div>
+                    <div class="support-item">
+                        <h4>On-Site Support</h4>
+                        <p>Technical visits for issues not resolved remotely, ensuring your system runs smoothly.</p>
+                    </div>
+                    <div class="support-item">
+                        <h4>Update & Patch Management</h4>
+                        <p>Providing system updates, security patches, and bug fixes to keep your software secure.</p>
+                    </div>
+                    <div class="support-item">
+                        <h4>Support Service Hours</h4>
+                        <p>Monday-Friday, 08:00 to 17:00 WIB (excluding national holidays), with 24/7 support for critical cases.</p>
+                    </div>
+                    <div class="support-item">
+                        <h4>System Performance</h4>
+                        <p>Ensuring your system operates according to specifications with optimal performance.</p>
+                    </div>
+                    <div class="support-item">
+                        <h4>System Security</h4>
+                        <p>Guaranteed protection against vulnerabilities with regular security patches and updates.</p>
+                    </div>
+                    <div class="support-item">
+                        <h4>Bug-Free Guarantee</h4>
+                        <p>Our development team commits to fixing major bugs at no additional cost during warranty.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Details Section -->
+            <section class="content-section">
+                <h2 class="section-title">Service Details</h2>
+                <div class="details-grid">
+                    <div class="detail-column">
+                        <h4>Backend Source Code Management</h4>
+                        <ul>
+                            <li>Regular backend source code updates</li>
+                            <li>Backend source code version control</li>
+                            <li>Backend deployment access control</li>
+                            <li>Backend source code version rollback feature</li>
+                            <li>Backend source code update history</li>
+                        </ul>
+                    </div>
+                    <div class="detail-column">
+                        <h4>Frontend Source Code Management</h4>
+                        <ul>
+                            <li>Regular frontend source code updates</li>
+                            <li>Frontend source code version control</li>
+                            <li>Frontend deployment access control</li>
+                            <li>Frontend source code version rollback feature</li>
+                            <li>Frontend source code update history</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Response Times -->
+            <section class="content-section">
+                <h2 class="section-title">Support Response Times</h2>
+                <table class="response-table">
+                    <thead>
+                        <tr>
+                            <th>Issue Category</th>
+                            <th>Response Time</th>
+                            <th>Estimated Resolution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @each(responseTime in licenseData.supportResponseTimes)
+                            <tr>
+                                <td><strong>{{ responseTime.category }}</strong><br>{{ responseTime.description }}</td>
+                                <td>{{ responseTime.responseTime }}</td>
+                                <td>{{ responseTime.resolution }}</td>
+                            </tr>
+                        @endeach
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Contact and Escalation -->
+            <section class="content-section">
+                <h2 class="section-title">Contact & Support</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4>Email Support</h4>
+                        <p>{{ licenseData.company.email }}</p>
+                        <p style="color: #64748b; margin-top: 0.5rem;">24/7 email support available</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Technical Point of Contact</h4>
+                        <p style="font-weight: bold; color: #1e293b;">{{ licenseData.company.pic.name }}</p>
+                        <p style="color: #2563eb; font-size: 1.1rem;">{{ licenseData.company.pic.phone }}</p>
+                        <p style="color: #64748b; margin-top: 0.5rem;">Direct technical support</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <div class="logo-icon" style="width: 40px; height: 40px; font-size: 20px;">F</div>
+                        <div>
+                            <div class="logo-text" style="font-size: 20px;">Forosta</div>
+                            <div style="color: #94a3b8; font-size: 12px;">Jaya Makmur</div>
+                        </div>
+                    </div>
+                    <p>{{ licenseData.company.name }}</p>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">{{ licenseData.company.address }}</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p>{{ licenseData.company.email }}</p>
+                    <p>Forosta Jaya Makmur</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Copyright © 2025 PT {{ licenseData.company.name }} | Professional IT Solutions & Software Development</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copy Success Message -->
+    <div class="copy-success" id="copySuccess">
+        License key copied to clipboard! ✓
+    </div>
+
+    <script>
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // License key copy functionality
+        document.querySelector('.license-key').addEventListener('click', function() {
+            const key = this.getAttribute('data-key');
+            navigator.clipboard.writeText(key).then(() => {
+                // Show success message
+                const successMsg = document.getElementById('copySuccess');
+                successMsg.classList.add('show');
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = key;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Show success message
+                const successMsg = document.getElementById('copySuccess');
+                successMsg.classList.add('show');
+                
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 3000);
+            });
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.support-item, .contact-item, .stat-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section, .stats-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

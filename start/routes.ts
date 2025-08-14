@@ -20,8 +20,8 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
-Route.get("/", async () => {
-  return { hello: "world" };
+Route.get("/", async ({ view }) => {
+  return view.render("welcome");
 });
 
 // API Routes
@@ -33,7 +33,58 @@ Route.group(() => {
   Route.post("/posts", "PostsController.store");
 }).prefix("/api");
 
-// Frontend route
+// Frontend routes
 Route.get("/dashboard", async ({ view }) => {
   return view.render("dashboard");
 });
+
+Route.get("/license/search", "LicenseController.search");
+Route.get("/license/:key", "LicenseController.show");
+
+// Admin routes
+Route.group(() => {
+  Route.get("/licenses", "AdminLicensesController.index").as(
+    "admin.licenses.index"
+  );
+  Route.get("/licenses/create", "AdminLicensesController.create").as(
+    "admin.licenses.create"
+  );
+  Route.post("/licenses", "AdminLicensesController.store").as(
+    "admin.licenses.store"
+  );
+  Route.get("/licenses/:id", "AdminLicensesController.show").as(
+    "admin.licenses.show"
+  );
+  Route.get("/licenses/:id/edit", "AdminLicensesController.edit").as(
+    "admin.licenses.edit"
+  );
+  Route.put("/licenses/:id", "AdminLicensesController.update").as(
+    "admin.licenses.update"
+  );
+  Route.delete("/licenses/:id", "AdminLicensesController.destroy").as(
+    "admin.licenses.destroy"
+  );
+
+  // Support Items Management
+  Route.get("/support-items", "AdminSupportItemsController.index").as(
+    "admin.support-items.index"
+  );
+  Route.get("/support-items/create", "AdminSupportItemsController.create").as(
+    "admin.support-items.create"
+  );
+  Route.post("/support-items", "AdminSupportItemsController.store").as(
+    "admin.support-items.store"
+  );
+  Route.get("/support-items/:id", "AdminSupportItemsController.show").as(
+    "admin.support-items.show"
+  );
+  Route.get("/support-items/:id/edit", "AdminSupportItemsController.edit").as(
+    "admin.support-items.edit"
+  );
+  Route.post("/support-items/:id", "AdminSupportItemsController.update").as(
+    "admin.support-items.update"
+  );
+  Route.post("/support-items/:id/delete", "AdminSupportItemsController.destroy").as(
+    "admin.support-items.destroy"
+  );
+}).prefix("/admin");

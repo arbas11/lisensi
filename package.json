@@ -1,12 +1,20 @@
 {
-  "name": "licence",
+  "name": "forosta-licence",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "node ace serve --watch",
-    "build": "node ace build --production --ignore-ts-errors",
-    "start": "node server.js",
-    "test": "node ace test"
+    "build": "node ace build --production",
+    "start": "node ace serve --production",
+    "start:watch": "node ace serve --watch",
+    "cpanel:start": "node cpanel-start.js",
+    "cpanel:build": "npm run build && echo 'Build complete for cPanel deployment'",
+    "cpanel:deploy": "npm run cpanel:build && npm run cpanel:start",
+    "cpanel:install": "npm install --production && npm run cpanel:build",
+    "cpanel:setup": "npm run cpanel:install && node ace migration:run && node ace db:seed",
+    "cpanel:restart": "echo 'Restart your Node.js app in cPanel Node.js Selector'",
+    "cpanel:logs": "echo 'Check logs in cPanel Node.js Selector or error_log'",
+    "cpanel:status": "echo 'Check status in cPanel Node.js Selector'"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.9.6",
@@ -30,9 +38,11 @@
     "@adonisjs/session": "^6.4.0",
     "@adonisjs/shield": "^7.1.1",
     "@adonisjs/view": "^6.2.0",
+    "@types/uuid": "^10.0.0",
     "mysql2": "^3.14.3",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.2.2",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "uuid": "^11.1.0"
   }
 }

@@ -1,29 +1,35 @@
-/*
-|--------------------------------------------------------------------------
-| Http Exception Handler
-|--------------------------------------------------------------------------
-|
-| AdonisJs will forward all exceptions occurred during an HTTP request to
-| the following class. You can learn more about exception handling by
-| reading docs.
-|
-| The exception handler extends a base `HttpExceptionHandler` which is not
-| mandatory, however it can do lot of heavy lifting to handle the errors
-| properly.
-|
-*/
-
-import Logger from '@ioc:Adonis/Core/Logger'
-import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
+import Logger from "@ioc:Adonis/Core/Logger";
+import HttpExceptionHandler from "@ioc:Adonis/Core/HttpExceptionHandler";
 
 export default class ExceptionHandler extends HttpExceptionHandler {
   protected statusPages = {
-    '403': 'errors/unauthorized',
-    '404': 'errors/not-found',
-    '500..599': 'errors/server-error',
+    "403": "errors/unauthorized",
+    "404": "errors/404",
+    "500..599": "errors/500",
+  };
+
+  constructor() {
+    super(Logger);
   }
 
-  constructor () {
-    super(Logger)
+  public async handle(error: any, ctx: any) {
+    // Check if it's a 404 error by looking at the error message
+    if (error.message && error.message.includes("E_ROUTE_NOT_FOUND")) {
+      return ctx.view.render("errors/404");
+    }
+
+    // For other errors, use the parent handler
+    return super.handle(error, ctx);
+  }
+
+  public async report(error: any, ctx: any) {
+    // Log errors for monitoring
+    Logger.error(
+      { err: error, url: ctx.request.url(), method: ctx.request.method() },
+      "Exception reported"
+    );
+
+    // Use parent report method
+    return super.report(error, ctx);
   }
 }

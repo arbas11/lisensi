@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create License - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    @include('components/navbar')
+
+    <div class="flex-1 py-8">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Header Section -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Create New License</h2>
+                <p class="text-gray-600 mt-2">Add a new software license to the system</p>
+            </div>
+
+            <!-- Create License Form -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form method="POST" action="/admin/licenses" class="space-y-6">
+                    <!-- License Key -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">License Key *</label>
+                        <input 
+                            type="text" 
+                            name="licenseKey" 
+                            required 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="e.g., SRC25-W4Q9K-M1T8J-L5X2B-C3V7N"
+                        >
+                    </div>
+
+                    <!-- Dates -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Start Date *</label>
+                            <input 
+                                type="date" 
+                                name="startDate" 
+                                required 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">End Date *</label>
+                            <input 
+                                type="date" 
+                                name="endDate" 
+                                required 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Status *</label>
+                        <select 
+                            name="status" 
+                            required 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Status</option>
+                            <option value="active">Active</option>
+                            <option value="expired">Expired</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+
+                    <!-- Company Information -->
+                    <div class="border-t pt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Company Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                                <input 
+                                    type="text" 
+                                    name="companyName" 
+                                    required 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Company Email *</label>
+                                <input 
+                                    type="email" 
+                                    name="companyEmail" 
+                                    required 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Company Address</label>
+                            <textarea 
+                                name="companyAddress" 
+                                rows="3" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Point of Contact -->
+                    <div class="border-t pt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Point of Contact</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">PIC Name *</label>
+                                <input 
+                                    type="text" 
+                                    name="picName" 
+                                    required 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">PIC Phone *</label>
+                                <input 
+                                    type="tel" 
+                                    name="picPhone" 
+                                    required 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Items -->
+                    <div class="border-t pt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Technical Support & Warranty Scope</h3>
+                        <p class="text-gray-600 mb-4">Select which support services and warranty items are included in this license:</p>
+                        
+                        @if(supportItems && supportItems.length > 0)
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                @each(item in supportItems)
+                                    <div class="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                        <input 
+                                            type="checkbox" 
+                                            name="support_items[]" 
+                                            value="{{ item.id }}" 
+                                            id="support_item_{{ item.id }}"
+                                            class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                        >
+                                        <div class="flex-1">
+                                            <label for="support_item_{{ item.id }}" class="block text-sm font-medium text-gray-700 cursor-pointer">
+                                                {{ item.title }}
+                                            </label>
+                                            <p class="text-xs text-gray-500 mt-1">{{ item.description }}</p>
+                                            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mt-1">
+                                                {{ item.category }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                @endeach
+                            </div>
+                        @else
+                            <div class="text-center py-8 text-gray-500">
+                                <p>No support items available. Please create support items first.</p>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Support Response Times -->
+                    <div class="border-t pt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Support Response Times</h3>
+                        <div id="supportTimes">
+                            <div class="support-time-entry border border-gray-200 rounded-lg p-4 mb-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                                        <input 
+                                            type="text" 
+                                            name="supportCategories[]" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="e.g., Technical Support"
+                                        >
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Response Time</label>
+                                        <input 
+                                            type="text" 
+                                            name="supportResponseTimes[]" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="e.g., 2 hours"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                        <textarea 
+                                            name="supportDescriptions[]" 
+                                            rows="2" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Description of the support category"
+                                        ></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Resolution</label>
+                                        <textarea 
+                                            name="supportResolutions[]" 
+                                            rows="2" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Expected resolution time"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button 
+                            type="button" 
+                            onclick="addSupportTime()" 
+                            class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
+                        >
+                            + Add Support Time
+                        </button>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="border-t pt-6 flex justify-end space-x-4">
+                        <a href="/admin/licenses" class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors">
+                            Cancel
+                        </a>
+                        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">
+                            Create License
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @include('components/footer')
+
+    <script>
+        function addSupportTime() {
+            const container = document.getElementById('supportTimes');
+            const newEntry = container.children[0].cloneNode(true);
+            
+            // Clear the values
+            newEntry.querySelectorAll('input, textarea').forEach(input => {
+                input.value = '';
+            });
+            
+            container.appendChild(newEntry);
+        }
+    </script>
+</body>
+</html>

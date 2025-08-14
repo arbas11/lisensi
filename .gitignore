@@ -44,6 +44,11 @@ deploy-*.sh
 start-*.sh
 cron-*.sh
 
+# cPanel specific files
+cpanel.env
+cpanel-start.js
+.htaccess
+
 # Template files (safe to commit)
 !*.template
 !*.template.sh
