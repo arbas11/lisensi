@@ -27,6 +27,19 @@ coverage
 .env.staging
 .env.*.local
 
+# Additional security patterns
+env.development
+env.production
+env.example
+setup-*.sh
+deploy-*.sh
+start-*.sh
+cron-*.sh
+
+# Template files (safe to commit)
+!*.template
+!*.template.sh
+
 # IDE and editor files
 .vscode
 .idea
