@@ -91,7 +91,8 @@ Route.group(() => {
   Route.post("/support-items/:id", "AdminSupportItemsController.update").as(
     "admin.support-items.update"
   );
-  Route.post("/support-items/:id/delete", "AdminSupportItemsController.destroy").as(
-    "admin.support-items.destroy"
-  );
+  Route.post(
+    "/support-items/:id/delete",
+    "AdminSupportItemsController.destroy"
+  ).as("admin.support-items.destroy");
 }).prefix("/admin");
